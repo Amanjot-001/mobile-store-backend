@@ -70,3 +70,16 @@ export const logoutUser = (req, res) => {
         }
     });
 };
+
+export const checkUser = async (req, res) => {
+    try {
+        let username = req.body.username;
+        const validUsername = await User.findOne({ username });
+        if (validUsername)
+            res.sendStatus(200);
+        else 
+            res.sendStatus(404);
+    } catch (error) {
+        res.status(500).json({ message: 'Cannot retrieve username' });
+    }
+}
