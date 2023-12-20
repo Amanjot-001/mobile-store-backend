@@ -1,0 +1,19 @@
+{
+  "name": "mobile-store-backend",
+  "version": "1.0.0",
+  "description": "Backend for mobile-store",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Amanjot-001/mobile-store-backend.git"
+  },
+  "author": "Aman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Amanjot-001/mobile-store-backend/issues"
+  },
+  "homepage": "https://github.com/Amanjot-001/mobile-store-backend#readme"
+}
