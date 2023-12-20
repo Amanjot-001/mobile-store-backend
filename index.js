@@ -1,7 +1,18 @@
-import Express from "express";
+import express from 'express';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+import connectDB from './db.js';
 
-const app = Express();
+dotenv.config();
+connectDB();
 
-app.listen(8080, (req, res) => {
-    console.log("Server running on 8080");
+const app = express();
+const PORT = process.env.PORT || 8080;
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
