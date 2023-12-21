@@ -6,6 +6,7 @@ import session from 'express-session';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import bodyParser from "body-parser";
+import MongoDBStore from 'connect-mongodb-session';
 
 connectDB();
 
@@ -17,11 +18,23 @@ app.use(bodyParser.json());
 app.use(Express.json());
 app.use(Express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+const MongoStore = MongoDBStore(session);
+const store = new MongoStore({
+    uri: process.env.MONGO_PROD_URL,
+    collection: 'sessions',
+});
+
+store.on('error', (error) => {
+    console.error('MongoDBStore error:', error);
+});
+
 app.use(
     session({
         secret: process.env.SESSION_SECRET || 'your_secret_key',
         resave: true,
         saveUninitialized: true,
+        store: store,
         cookie: { maxAge: 3 * 30 * 24 * 60 * 60 * 1000 },
     })
 );
