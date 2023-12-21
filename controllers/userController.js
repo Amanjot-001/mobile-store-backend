@@ -76,7 +76,7 @@ export const checkUser = async (req, res) => {
         let username = req.body.username;
         const validUsername = await User.findOne({ username });
         if (validUsername)
-            res.status(200).json({ status: 200, username: validUser.username });
+            res.status(200).json({ status: 200, username: validUsername.username });
         else
             res.sendStatus(404);
     } catch (error) {
