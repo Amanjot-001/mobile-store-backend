@@ -1,10 +1,5 @@
 import mongoose from "mongoose";
 
-// mongoose
-//     .connect(process.env.MONGO_PROD_URL)
-//     .then(() => console.log('db connected'))
-//     .catch((err) => console.log(err));
-
 const UserSchema = new mongoose.Schema({
     username: {
         type: String,

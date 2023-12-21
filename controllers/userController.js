@@ -76,10 +76,38 @@ export const checkUser = async (req, res) => {
         let username = req.body.username;
         const validUsername = await User.findOne({ username });
         if (validUsername)
-            res.sendStatus(200);
-        else 
+            res.status(200).json({ status: 200, username: validUser.username });
+        else
             res.sendStatus(404);
     } catch (error) {
         res.status(500).json({ message: 'Cannot retrieve username' });
     }
+}
+
+export const allUsers = async (req, res) => {
+    const users = await User.find({});
+    res.send(users);
+}
+
+export const fetchUser = async (req, res) => {
+    try {
+        if (req.session && req.session.userId) {
+            const user = await User.findById(req.session.userId);
+
+            if (user) {
+                res.sendStatus(200);
+            } else {
+                res.sendStatus(404);
+            }
+        } else {
+            res.sendStatus(401);
+        }
+    } catch (error) {
+        console.error('Error fetching user:', error);
+        res.sendStatus(500);
+    }
+}
+
+export const startServer = async (req, res) => {
+    res.sendStatus(200);
 }
